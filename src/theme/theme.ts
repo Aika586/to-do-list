@@ -1,9 +1,11 @@
 import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
 import { buttonRecipe } from "../theme/components/button.recipe"
+import { inputRecipe } from "./components/input.recipe"
 const config = defineConfig({
   theme: {
     recipes: {
       button: buttonRecipe,
+      input:inputRecipe 
     },
     tokens: {
 
