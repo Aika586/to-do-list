@@ -45,7 +45,7 @@ const SelectStatus = () => {
                 : {}
             }
             boxShadow={isOpen ? "inset 0 0 0 3px #6C63FF" : "none "}
-            borderRadius={"7px"}
+            borderRadius={"5px"}
           >
             <Select.ValueText
               textTransform="uppercase"

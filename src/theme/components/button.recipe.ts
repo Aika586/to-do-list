@@ -45,10 +45,9 @@ export const buttonRecipe = defineRecipe({
       },
 
       ghost: {
-        opacity: 0.3,
         _hover: {
           bg: "none",
-          opacity:"0,3"
+          
         },
       },
     },
