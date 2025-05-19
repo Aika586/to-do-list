@@ -1,8 +1,8 @@
 import { Accordion, Stack, Span } from "@chakra-ui/react";
 import { LuChartBarStacked, LuTags } from "react-icons/lu";
-import { Checkbox } from "./Checkbox";
+import { Checkbox } from "./ui/Checkbox";
 import { VscTrash } from "react-icons/vsc";
-import { IconButton } from "./IconButton";
+import { IconButton } from "./ui/IconButton";
 import { VscEdit } from "react-icons/vsc";
 
 const ToDoList = () => {

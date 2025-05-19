@@ -22,6 +22,7 @@ export const buttonRecipe = defineRecipe({
           borderWidth: "2px",
           borderColor: "blue.default",
         },
+        boxShadow:"0 4px 4px rgba(0, 0, 0, 0.25)"
       },
     },
     variant: {
