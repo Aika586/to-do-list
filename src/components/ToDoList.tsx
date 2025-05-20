@@ -1,27 +1,49 @@
-import { Accordion, Stack, Span } from "@chakra-ui/react";
-import { LuChartBarStacked, LuTags } from "react-icons/lu";
+import { Accordion, Stack, Span, Box, Text } from "@chakra-ui/react";
 import { Checkbox } from "./ui/Checkbox";
 import { VscTrash } from "react-icons/vsc";
 import { IconButton } from "./ui/IconButton";
 import { VscEdit } from "react-icons/vsc";
-
+import { CiCalendar } from "react-icons/ci";
+import { useTodoStore } from "../store/todoStore";
 const ToDoList = () => {
+  const { todos } = useTodoStore();
   return (
-    <Stack width="full" maxW="520px" mx='auto' >
-      <Accordion.Root collapsible size={'lg'}>
-        {items.map((item) => (
-          <Accordion.Item key={item.value} value={item.value} borderColor='blue.500'>
-            <Accordion.ItemTrigger className="group" gap={'12px'} >
+    <Stack width="full" maxW="520px" mx="auto">
+      <Accordion.Root collapsible size={"lg"}>
+        {todos.map((todo) => (
+          <Accordion.Item
+            key={todo.id}
+            value={todo.titleTodo}
+            borderColor="blue.500"
+          >
+            <Accordion.ItemTrigger className="group" gap={"12px"}>
               <Span flex="2" onClick={(e) => e.stopPropagation()}>
                 {" "}
-                <Checkbox>{item.title}</Checkbox>
+                <Checkbox>{todo.titleTodo}</Checkbox>
               </Span>
-              <IconButton _hover={{color:'blue.default'}}><VscEdit/></IconButton>
-              <IconButton _hover={{ color: "red.600" }}><VscTrash/></IconButton>
-              <Accordion.ItemIndicator color='blue.default' cursor={'pointer'} />
-            </Accordion.ItemTrigger >
+              <IconButton _hover={{ color: "blue.default" }}>
+                <VscEdit />
+              </IconButton>
+              <IconButton _hover={{ color: "red.600" }}>
+                <VscTrash />
+              </IconButton>
+              <Accordion.ItemIndicator
+                color="blue.default"
+                cursor={"pointer"}
+              />
+            </Accordion.ItemTrigger>
             <Accordion.ItemContent>
-              <Accordion.ItemBody>{item.content}</Accordion.ItemBody>
+              <Accordion.ItemBody>
+                <Box px="1">
+                  <Text fontSize={"18px"}>{todo.description}</Text>
+                  <Stack direction={"row"} mt="2">
+                    <CiCalendar size={"22px"} color="blue" />{" "}
+                    <Text fontSize={"15px"} color="grey" fontWeight={'medium'}>
+                      {todo.dueDate}
+                    </Text>
+                  </Stack>
+                </Box>
+              </Accordion.ItemBody>
             </Accordion.ItemContent>
           </Accordion.Item>
         ))}
@@ -31,20 +53,3 @@ const ToDoList = () => {
 };
 
 export default ToDoList;
-
-const items = [
-  {
-    value: "info",
-    icon: <LuTags />,
-    title: "Product Info",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec odio vel dui euismod fermentum.",
-  },
-  {
-    value: "stats",
-    icon: <LuChartBarStacked />,
-    title: "Stats",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec odio vel dui euismod fermentum.",
-  },
-];
