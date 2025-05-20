@@ -6,9 +6,12 @@ export const buttonRecipe = defineRecipe({
     alignItems: "center",
     justifyContent: "center",
   },
-
   variants: {
     size: {
+      xs: {
+        w: "39px",
+        h: "39px",
+      },
       md: {
         fontSize: "18px",
         w: "100px",
@@ -22,7 +25,7 @@ export const buttonRecipe = defineRecipe({
           borderWidth: "2px",
           borderColor: "blue.default",
         },
-        boxShadow:"0 4px 4px rgba(0, 0, 0, 0.25)"
+        boxShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
       },
     },
     variant: {
@@ -48,7 +51,6 @@ export const buttonRecipe = defineRecipe({
       ghost: {
         _hover: {
           bg: "none",
-          
         },
       },
     },

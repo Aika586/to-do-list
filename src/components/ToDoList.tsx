@@ -7,11 +7,11 @@ import { VscEdit } from "react-icons/vsc";
 
 const ToDoList = () => {
   return (
-    <Stack width="full" maxW="400px">
-      <Accordion.Root collapsible>
+    <Stack width="full" maxW="520px" mx='auto' >
+      <Accordion.Root collapsible size={'lg'}>
         {items.map((item) => (
-          <Accordion.Item key={item.value} value={item.value}>
-            <Accordion.ItemTrigger className="group" gap={'12px'}>
+          <Accordion.Item key={item.value} value={item.value} borderColor='blue.500'>
+            <Accordion.ItemTrigger className="group" gap={'12px'} >
               <Span flex="2" onClick={(e) => e.stopPropagation()}>
                 {" "}
                 <Checkbox>{item.title}</Checkbox>

@@ -1,5 +1,3 @@
-
-
 import {
   Button,
   Dialog,
@@ -8,27 +6,36 @@ import {
   Portal,
   Stack,
   Textarea,
+  Icon,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import { RiAddLargeLine } from "react-icons/ri";
 
 const AddToDos = () => {
   const ref = useRef<HTMLInputElement>(null);
   return (
     <Dialog.Root initialFocusEl={() => ref.current} motionPreset="slide-in-top">
       <Dialog.Trigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button
+          variant="solid"
+          size="sm"
+          _expanded={{ bg: "blue.600" }}
+        >
+          {" "}
+          <Icon as={RiAddLargeLine} boxSize="7" />
+        </Button>
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop/>
+        <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content borderRadius={'16px'}>
+          <Dialog.Content borderRadius={"16px"}>
             <Dialog.Header>
               <Dialog.Title fontSize={"24px"} mx={"auto"}>
                 NEW NOTE
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Body pb="4">
-              <Stack gap="4" padding='3'>
+              <Stack gap="4" padding="3">
                 <Field.Root>
                   <Input ref={ref} placeholder="Input your note..." />
                 </Field.Root>
@@ -38,20 +45,23 @@ const AddToDos = () => {
                     size="md"
                     resize={"none"}
                     height="100px"
-                    borderColor={'blue.default'}
-                    _placeholder={{color: "#C3C1E5",fontSize:'16px'}}
-                    _focusWithin={{ borderColor: "blue.400", boxShadow: "0 0 5px blue" }}
+                    borderColor={"blue.default"}
+                    _placeholder={{ color: "#C3C1E5", fontSize: "16px" }}
+                    _focusWithin={{
+                      borderColor: "blue.400",
+                      boxShadow: "0 0 5px blue",
+                    }}
                   />
                   <Field.ErrorText>Field is required</Field.ErrorText>
                 </Field.Root>
                 <Field.Root>
-                  <Field.Label color='#C3C1E5'>Due date</Field.Label>
+                  <Field.Label color="#C3C1E5">Due date</Field.Label>
                   <Input type="date" />
                   <Field.ErrorText>Field is required</Field.ErrorText>
                 </Field.Root>
               </Stack>
             </Dialog.Body>
-            <Dialog.Footer justifyContent={'space-between'} marginX={'3'}>
+            <Dialog.Footer justifyContent={"space-between"} marginX={"3"}>
               <Dialog.ActionTrigger asChild>
                 <Button variant="outline">CANCEL</Button>
               </Dialog.ActionTrigger>

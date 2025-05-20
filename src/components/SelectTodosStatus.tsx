@@ -3,7 +3,7 @@ import {
   createListCollection,
   Portal,
   Box,
-  Text,
+  // Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -15,14 +15,14 @@ const statusList = createListCollection({
   ],
 });
 
-const SelectStatus = () => {
+const SelectTodosStatus = () => {
   const [selected, setSelected] = useState<string[]>(["all"]);
 
-  const currentStatus = selected[0];
+  // const currentStatus = selected[0];
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Box width="168px" ml="10">
+    <Box width="168px">
       <Select.Root
         collection={statusList}
         value={selected}
@@ -81,14 +81,14 @@ const SelectStatus = () => {
       </Select.Root>
 
       {/* Update UI based on selection */}
-      <Box mt={4} p={4} borderRadius="md">
+      {/* <Box mt={4} p={4} borderRadius="md">
         <Text fontWeight="bold">
           Current status:{" "}
           {statusList.items.find((i) => i.value === currentStatus)?.label}
         </Text>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
 
-export default SelectStatus;
+export default SelectTodosStatus;
