@@ -6,6 +6,7 @@ import {
   // Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useTodoStore } from "../store/todoStore"
 
 const statusList = createListCollection({
   items: [
@@ -16,17 +17,15 @@ const statusList = createListCollection({
 });
 
 const SelectTodosStatus = () => {
-  const [selected, setSelected] = useState<string[]>(["all"]);
-
-  // const currentStatus = selected[0];
+const { filterStatus, setFilterStatus } = useTodoStore();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Box width="168px">
       <Select.Root
         collection={statusList}
-        value={selected}
-        onValueChange={(e) => setSelected(e.value)}
+        value={filterStatus}
+        onValueChange={(e) => setFilterStatus(e.value)}
         onOpenChange={(details) => setIsOpen(details.open)}
         open={isOpen}
         color="white"
@@ -79,14 +78,6 @@ const SelectTodosStatus = () => {
           </Select.Positioner>
         </Portal>
       </Select.Root>
-
-      {/* Update UI based on selection */}
-      {/* <Box mt={4} p={4} borderRadius="md">
-        <Text fontWeight="bold">
-          Current status:{" "}
-          {statusList.items.find((i) => i.value === currentStatus)?.label}
-        </Text>
-      </Box> */}
     </Box>
   );
 };

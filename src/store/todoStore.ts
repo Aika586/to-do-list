@@ -16,12 +16,16 @@ interface TodoState {
   editTodo: (id: number, updatedTodo: Partial<Omit<Todo, "id">>) => void;
   toggleTodo: (id: number) => void;
   removeTodo: (id: number) => void;
+  filterStatus: string[];
+  setFilterStatus: (status:string[]) => void;
 }
 
 export const useTodoStore = create<TodoState>()(
   persist(
     (set) => ({
       todos: defaultTodos,
+      filterStatus: ["all"],
+      setFilterStatus: (status) => set(() => ({ filterStatus: status })),
       addTodo: ({ titleTodo, description, dueDate }) =>
         set((state) => ({
           todos: [
