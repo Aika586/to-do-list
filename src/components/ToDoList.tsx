@@ -8,13 +8,22 @@ import { useTodoStore } from "../store/todoStore";
 import { useDialog } from "../context/DialogContext";
 
 const ToDoList = () => {
-  const { todos, removeTodo, toggleTodo, filterStatus } = useTodoStore();
+  const { todos, removeTodo, toggleTodo, filterStatus,searchQuery } = useTodoStore();
   const { setOpen, setSelectedTodo } = useDialog();
-  const filteredTodos = todos.filter((todo) => {
-    if (filterStatus[0] === "complete") return todo.completed;
-    if (filterStatus[0] === "incomplete") return !todo.completed;
-    return true;
-  });
+ const filteredTodos = todos.filter((todo) => {
+  const matchesStatus =
+    filterStatus[0] === "complete"
+      ? todo.completed
+      : filterStatus[0] === "incomplete"
+      ? !todo.completed
+      : true;
+
+  const matchesSearch =
+    todo.titleTodo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    todo.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+  return matchesStatus && matchesSearch;
+});
   console.log(todos);
   return (
     <Stack width="full" maxW="520px" mx="auto">

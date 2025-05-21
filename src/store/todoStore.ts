@@ -17,7 +17,9 @@ interface TodoState {
   toggleTodo: (id: number) => void;
   removeTodo: (id: number) => void;
   filterStatus: string[];
-  setFilterStatus: (status:string[]) => void;
+  setFilterStatus: (status: string[]) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 export const useTodoStore = create<TodoState>()(
@@ -26,6 +28,8 @@ export const useTodoStore = create<TodoState>()(
       todos: defaultTodos,
       filterStatus: ["all"],
       setFilterStatus: (status) => set(() => ({ filterStatus: status })),
+      searchQuery: "",
+      setSearchQuery: (query) => set(() => ({ searchQuery: query })),
       addTodo: ({ titleTodo, description, dueDate }) =>
         set((state) => ({
           todos: [
