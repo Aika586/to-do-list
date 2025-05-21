@@ -1,3 +1,4 @@
+import React from "react";
 import { Accordion, Stack, Span, Box, Text } from "@chakra-ui/react";
 import { Checkbox } from "./ui/Checkbox";
 import { VscTrash } from "react-icons/vsc";
@@ -8,9 +9,9 @@ import { useTodoStore } from "../store/todoStore";
 import { useDialog } from "../context/DialogContext";
 
 const ToDoList = () => {
-  const { todos } = useTodoStore();
+  const { todos, removeTodo, toggleTodo } = useTodoStore();
   const { setOpen, setSelectedTodo } = useDialog();
-
+  console.log(todos);
   return (
     <Stack width="full" maxW="520px" mx="auto">
       <Accordion.Root collapsible size={"lg"}>
@@ -23,7 +24,12 @@ const ToDoList = () => {
             <Accordion.ItemTrigger className="group" gap={"12px"}>
               <Span flex="2" onClick={(e) => e.stopPropagation()}>
                 {" "}
-                <Checkbox>{todo.titleTodo}</Checkbox>
+                <Checkbox
+                  isCompleted={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                >
+                  {todo.titleTodo}
+                </Checkbox>
               </Span>
               <IconButton
                 _hover={{ color: "blue.default" }}
@@ -34,7 +40,10 @@ const ToDoList = () => {
               >
                 <VscEdit />
               </IconButton>
-              <IconButton _hover={{ color: "red.600" }}>
+              <IconButton
+                _hover={{ color: "red.600" }}
+                onClick={() => removeTodo(todo.id)}
+              >
                 <VscTrash />
               </IconButton>
               <Accordion.ItemIndicator
@@ -45,7 +54,13 @@ const ToDoList = () => {
             <Accordion.ItemContent>
               <Accordion.ItemBody>
                 <Box px="1">
-                  <Text fontSize={"18px"}>{todo.description}</Text>
+                  <Text
+                    fontSize={"18px"}
+                    textDecoration={todo.completed ? "line-through" : "none"}
+                    opacity={todo.completed ? 0.5 : 1}
+                  >
+                    {todo.description}
+                  </Text>
                   <Stack direction={"row"} mt="2">
                     <CiCalendar size={"22px"} color="blue" />{" "}
                     <Text fontSize={"15px"} color="grey" fontWeight={"medium"}>
