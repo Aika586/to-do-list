@@ -1,10 +1,10 @@
-
-import { Box, Heading, Stack} from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import SearchTodos from "./components/SearchTodos";
 import SelectTodosStatus from "./components/SelectTodosStatus";
 import { ColorModeButton } from "./components/ui/color-mode";
 import ToDoList from "./components/ToDoList";
-import AddToDos from "./components/AddToDos";
+import AddToDos from "./components/AddToDoModal";
+import { DialogProvider } from "./context/DialogContext";
 function App() {
   return (
     <>
@@ -27,10 +27,12 @@ function App() {
           <SelectTodosStatus />
           <ColorModeButton />
         </Stack>
-        <ToDoList />
-        <Box position={"absolute"} bottom={"32px"} right={"8px"}>
-          <AddToDos />
-        </Box>
+        <DialogProvider>
+          <ToDoList />
+          <Box position={"absolute"} bottom={"32px"} right={"8px"}>
+            <AddToDos />
+          </Box>
+        </DialogProvider>
       </Box>
     </>
   );

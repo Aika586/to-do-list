@@ -1,0 +1,92 @@
+import React from "react";
+import { Button, Input, Stack, Textarea, Field } from "@chakra-ui/react";
+import { useDialog } from "../context/DialogContext";
+import { useForm } from "react-hook-form";
+import { useTodoStore } from "../store/todoStore";
+interface FormValues {
+  titleTodo: string;
+  description: string;
+  dueDate: string;
+}
+
+const AddEditForm = ({
+  ref,
+}: {
+  ref: React.RefObject<HTMLInputElement | null>;
+}) => {
+    const { addTodo} = useTodoStore();
+     const { setOpen } = useDialog();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      titleTodo: "",
+      description: "",
+      dueDate: "",
+    },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
+    addTodo(data);
+    reset();
+  });
+
+  return (
+    <form onSubmit={onSubmit}>
+      <Stack gap="4" padding="3">
+        <Field.Root invalid={!!errors.titleTodo}>
+          <Input
+            placeholder="Input your note..."
+            {...register("titleTodo", {
+              required: "Title of note is required",
+            })}
+            ref={(e) => {
+              register("titleTodo").ref(e); // react-hook-form ref
+              ref.current = e; // your own ref
+            }}
+          />
+          <Field.ErrorText>{errors.titleTodo?.message}</Field.ErrorText>
+        </Field.Root>
+        <Field.Root invalid={!!errors.description}>
+          <Textarea
+            placeholder="Start typing your task description..."
+            size="md"
+            resize={"none"}
+            height="100px"
+            borderColor={errors.description ? "red.500" : "blue.default"}
+            _placeholder={{ color: "#C3C1E5", fontSize: "16px" }}
+            _focusWithin={{
+              borderColor: "blue.400",
+              boxShadow: "0 0 5px blue",
+            }}
+            {...register("description", {
+              required: "Description of note is required",
+            })}
+          />
+          <Field.ErrorText>{errors.description?.message}</Field.ErrorText>
+        </Field.Root>
+        <Field.Root invalid={!!errors.dueDate}>
+          <Field.Label color="#C3C1E5">Due date</Field.Label>
+          <Input
+            type="date"
+            {...register("dueDate", {
+              required: "Due date of note is required",
+            })}
+          />
+          <Field.ErrorText>{errors.dueDate?.message}</Field.ErrorText>
+        </Field.Root>
+        <Stack direction='row' justifyContent={"space-between"}>
+          {" "}
+          <Button variant="outline" onClick={()=>setOpen(false)}>CANCEL</Button>
+          <Button type="submit">APPLY</Button>
+        </Stack>
+      </Stack>
+    </form>
+  );
+};
+
+export default AddEditForm;
