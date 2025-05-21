@@ -3,8 +3,9 @@ import SearchTodos from "./components/SearchTodos";
 import SelectTodosStatus from "./components/SelectTodosStatus";
 import { ColorModeButton } from "./components/ui/color-mode";
 import ToDoList from "./components/ToDoList";
-import AddToDos from "./components/AddToDoModal";
+import AddEditTodoModal from "./components/AddEditTodoModal";
 import { DialogProvider } from "./context/DialogContext";
+import OpenModalButton from "./components/OpenModalButton";
 function App() {
   return (
     <>
@@ -30,8 +31,9 @@ function App() {
         <DialogProvider>
           <ToDoList />
           <Box position={"absolute"} bottom={"32px"} right={"8px"}>
-            <AddToDos />
+            <OpenModalButton />
           </Box>
+          <AddEditTodoModal />
         </DialogProvider>
       </Box>
     </>

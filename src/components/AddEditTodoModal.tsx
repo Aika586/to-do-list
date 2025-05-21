@@ -1,10 +1,9 @@
-import { Button, Dialog, Portal, Icon } from "@chakra-ui/react";
+import { Dialog, Portal} from "@chakra-ui/react";
 import { useRef } from "react";
-import { RiAddLargeLine } from "react-icons/ri";
 import AddEditForm from "./AddEditForm";
 import { useDialog } from "../context/DialogContext";
 
-const AddToDos = () => {
+const AddEditTodoModal = () => {
   const ref = useRef<HTMLInputElement>(null);
   const { open, setOpen } = useDialog();
 
@@ -16,12 +15,6 @@ const AddToDos = () => {
       open={open}
       onOpenChange={(e) => setOpen(e.open)}
     >
-      <Dialog.Trigger asChild>
-        <Button variant="solid" size="sm" _expanded={{ bg: "blue.600" }}>
-          {" "}
-          <Icon as={RiAddLargeLine} boxSize="7" />
-        </Button>
-      </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
@@ -41,4 +34,4 @@ const AddToDos = () => {
   );
 };
 
-export default AddToDos;
+export default AddEditTodoModal;

@@ -14,8 +14,8 @@ const AddEditForm = ({
 }: {
   ref: React.RefObject<HTMLInputElement | null>;
 }) => {
-    const { addTodo} = useTodoStore();
-     const { setOpen } = useDialog();
+  const { addTodo, editTodo } = useTodoStore();
+  const { selectedTodo, setOpen, setSelectedTodo } = useDialog();
   const {
     register,
     handleSubmit,
@@ -29,12 +29,33 @@ const AddEditForm = ({
     },
   });
 
+  React.useEffect(() => {
+    if (selectedTodo) {
+      reset({
+        titleTodo: selectedTodo.titleTodo,
+        description: selectedTodo.description,
+        dueDate: selectedTodo.dueDate,
+      });
+    } else {
+      reset();
+    }
+  }, [selectedTodo, reset]);
+ 
   const onSubmit = handleSubmit((data) => {
-    console.log(data)
-    addTodo(data);
+    if (selectedTodo) {
+      editTodo(selectedTodo.id, data);
+    } else {
+      addTodo(data);
+    }
+    setOpen(false);
+    setSelectedTodo(null);
     reset();
   });
 
+  const handelCancel=()=>{
+    setSelectedTodo(null);
+    setOpen(false)
+  }
   return (
     <form onSubmit={onSubmit}>
       <Stack gap="4" padding="3">
@@ -45,8 +66,8 @@ const AddEditForm = ({
               required: "Title of note is required",
             })}
             ref={(e) => {
-              register("titleTodo").ref(e); // react-hook-form ref
-              ref.current = e; // your own ref
+              register("titleTodo").ref(e);
+              ref.current = e;
             }}
           />
           <Field.ErrorText>{errors.titleTodo?.message}</Field.ErrorText>
@@ -79,10 +100,12 @@ const AddEditForm = ({
           />
           <Field.ErrorText>{errors.dueDate?.message}</Field.ErrorText>
         </Field.Root>
-        <Stack direction='row' justifyContent={"space-between"}>
+        <Stack direction="row" justifyContent={"space-between"}>
           {" "}
-          <Button variant="outline" onClick={()=>setOpen(false)}>CANCEL</Button>
-          <Button type="submit">APPLY</Button>
+          <Button variant="outline" onClick={handelCancel}>
+            CANCEL
+          </Button>
+          <Button type="submit"> {selectedTodo ? "UPDATE" : "APPLY"}</Button>
         </Stack>
       </Stack>
     </form>

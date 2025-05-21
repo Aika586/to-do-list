@@ -5,8 +5,12 @@ import { IconButton } from "./ui/IconButton";
 import { VscEdit } from "react-icons/vsc";
 import { CiCalendar } from "react-icons/ci";
 import { useTodoStore } from "../store/todoStore";
+import { useDialog } from "../context/DialogContext";
+
 const ToDoList = () => {
   const { todos } = useTodoStore();
+  const { setOpen, setSelectedTodo } = useDialog();
+
   return (
     <Stack width="full" maxW="520px" mx="auto">
       <Accordion.Root collapsible size={"lg"}>
@@ -21,7 +25,13 @@ const ToDoList = () => {
                 {" "}
                 <Checkbox>{todo.titleTodo}</Checkbox>
               </Span>
-              <IconButton _hover={{ color: "blue.default" }}>
+              <IconButton
+                _hover={{ color: "blue.default" }}
+                onClick={() => {
+                  setSelectedTodo(todo);
+                  setOpen(true);
+                }}
+              >
                 <VscEdit />
               </IconButton>
               <IconButton _hover={{ color: "red.600" }}>
@@ -38,7 +48,7 @@ const ToDoList = () => {
                   <Text fontSize={"18px"}>{todo.description}</Text>
                   <Stack direction={"row"} mt="2">
                     <CiCalendar size={"22px"} color="blue" />{" "}
-                    <Text fontSize={"15px"} color="grey" fontWeight={'medium'}>
+                    <Text fontSize={"15px"} color="grey" fontWeight={"medium"}>
                       {todo.dueDate}
                     </Text>
                   </Stack>

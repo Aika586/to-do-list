@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { defaultTodos } from "../constants/defaultTodos";
 
-interface Todo {
+export interface Todo {
   id: number;
   titleTodo: string;
   description: string;
