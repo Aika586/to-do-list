@@ -6,6 +6,7 @@ import ToDoList from "./components/ToDoList";
 import AddEditTodoModal from "./components/AddEditTodoModal";
 import { DialogProvider } from "./context/DialogContext";
 import OpenModalButton from "./components/OpenModalButton";
+import UndoDelete from "./components/UndoDelete";
 function App() {
   return (
     <>
@@ -32,6 +33,9 @@ function App() {
           <ToDoList />
           <Box position={"absolute"} bottom={"32px"} right={"8px"}>
             <OpenModalButton />
+          </Box>
+          <Box position={"absolute"} bottom={"32px"} left={"8px"}>
+            <UndoDelete />
           </Box>
           <AddEditTodoModal />
         </DialogProvider>

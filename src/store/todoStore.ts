@@ -15,7 +15,9 @@ interface TodoState {
   addTodo: (todo: Omit<Todo, "id" | "completed">) => void;
   editTodo: (id: number, updatedTodo: Partial<Omit<Todo, "id">>) => void;
   toggleTodo: (id: number) => void;
-  removeTodo: (id: number) => void;
+  removedTodo: Todo | null;
+  removeTodo: (id:number) => void;
+  undoRemove: () => void;
   filterStatus: string[];
   setFilterStatus: (status: string[]) => void;
   searchQuery: string;
@@ -24,8 +26,9 @@ interface TodoState {
 
 export const useTodoStore = create<TodoState>()(
   persist(
-    (set) => ({
+    (set,get) => ({
       todos: defaultTodos,
+      removedTodo: null,
       filterStatus: ["all"],
       setFilterStatus: (status) => set(() => ({ filterStatus: status })),
       searchQuery: "",
@@ -55,10 +58,23 @@ export const useTodoStore = create<TodoState>()(
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
           ),
         })),
-      removeTodo: (id) =>
-        set((state) => ({
-          todos: state.todos.filter((todo) => todo.id !== id),
-        })),
+     removeTodo: (id) => {
+    const todos = get().todos;
+    const deleted = todos.find((t) => t.id === id);
+    set({
+      todos: todos.filter((t) => t.id !== id),
+      removedTodo: deleted ?? null,
+    });
+  },
+    undoRemove: () => {
+    const deleted = get().removedTodo;
+    if (deleted) {
+      set((state) => ({
+        todos: [...state.todos, deleted],
+        removedTodo: null,
+      }));
+    }
+  },
     }),
     {
       name: "todo-storage",
