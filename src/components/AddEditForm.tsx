@@ -78,11 +78,12 @@ const AddEditForm = ({
             size="md"
             resize={"none"}
             height="100px"
-            borderColor={errors.description ? "red.500" : "blue.default"}
+            borderColor={errors.description ? "red.500" : "border.default"}
             _placeholder={{ color: "#C3C1E5", fontSize: "16px" }}
             _focusWithin={{
               borderColor: "blue.400",
               boxShadow: "0 0 5px blue",
+              color:'fg.inputText'
             }}
             {...register("description", {
               required: "Description of note is required",

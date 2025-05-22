@@ -17,12 +17,16 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         {...rest}
         ref={rootRef}
         size="lg"
-        colorPalette={"blue"}
+        // colorPalette={"blue"}
         checked={props.isCompleted}
         onCheckedChange={props.onChange}
       >
         <ChakraCheckbox.HiddenInput ref={ref} {...inputProps} />
-        <ChakraCheckbox.Control borderColor={"blue.default"}>
+        <ChakraCheckbox.Control
+          borderColor={"blue.default"}
+          bg={props.isCompleted ? "blue.default" : "none"}
+          cursor="pointer"
+        >
           <ChakraCheckbox.Indicator />
         </ChakraCheckbox.Control>
         {children != null && (

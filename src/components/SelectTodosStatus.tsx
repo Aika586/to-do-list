@@ -69,9 +69,12 @@ const { filterStatus, setFilterStatus } = useTodoStore();
                   item={item}
                   _hover={{ bg: "blue.50" }}
                   _highlighted={{ bg: "gray.200" }}
-                  _selected={{ bg: "blue.100", fontWeight: "bold" }}
+                  _selected={{ bg: "blue.100"}}
+                  cursor='pointer'
+                  fontSize={'16px'}
+                  color='blue.default'
                 >
-                  {item.label.toUpperCase()}
+                  {item.label}
                 </Select.Item>
               ))}
             </Select.Content>

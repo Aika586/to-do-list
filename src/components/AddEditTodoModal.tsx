@@ -1,4 +1,4 @@
-import { Dialog, Portal} from "@chakra-ui/react";
+import { Dialog, Portal } from "@chakra-ui/react";
 import { useRef } from "react";
 import AddEditForm from "./AddEditForm";
 import { useDialog } from "../context/DialogContext";
@@ -18,7 +18,13 @@ const AddEditTodoModal = () => {
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content borderRadius={"16px"}>
+          <Dialog.Content
+            borderRadius={"16px"}
+            borderWidth="1px"
+            _dark={{
+              borderColor:'white'
+            }}
+          >
             <Dialog.Header>
               <Dialog.Title fontSize={"24px"} mx={"auto"}>
                 NEW NOTE

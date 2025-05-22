@@ -5,7 +5,7 @@ const config = defineConfig({
   theme: {
     recipes: {
       button: buttonRecipe,
-      input:inputRecipe 
+      input:inputRecipe,
     },
     tokens: {
 
@@ -33,7 +33,7 @@ const config = defineConfig({
         },
         border: {
           default: {
-            value: { _light: "{colors.blue.DEFAULT}", _dark: "{colors.white}" }, 
+            value: { _light: "{colors.blue.default}", _dark: "{colors.white}" }, 
           },
         },
         focusColor: {
