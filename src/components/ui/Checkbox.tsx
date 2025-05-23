@@ -1,5 +1,6 @@
 import { Checkbox as ChakraCheckbox } from "@chakra-ui/react";
 import * as React from "react";
+import { useColorModeValue } from "./color-mode";
 
 export interface CheckboxProps extends ChakraCheckbox.RootProps {
   icon?: React.ReactNode;
@@ -12,12 +13,12 @@ export interface CheckboxProps extends ChakraCheckbox.RootProps {
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(props, ref) {
     const { children, rootRef, inputProps, ...rest } = props;
+    const indicatorColor = useColorModeValue("white", "white");
     return (
       <ChakraCheckbox.Root
         {...rest}
         ref={rootRef}
         size="lg"
-        // colorPalette={"blue"}
         checked={props.isCompleted}
         onCheckedChange={props.onChange}
       >
@@ -27,7 +28,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           bg={props.isCompleted ? "blue.default" : "none"}
           cursor="pointer"
         >
-          <ChakraCheckbox.Indicator />
+          <ChakraCheckbox.Indicator color={indicatorColor}/>
         </ChakraCheckbox.Control>
         {children != null && (
           <ChakraCheckbox.Label

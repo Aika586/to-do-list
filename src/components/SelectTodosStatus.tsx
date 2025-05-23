@@ -49,7 +49,7 @@ const { filterStatus, setFilterStatus } = useTodoStore();
             <Select.ValueText
               textTransform="uppercase"
               fontWeight={"medium"}
-              fontSize={"md"}
+              fontSize={"18px"}
             />
           </Select.Trigger>
           <Select.IndicatorGroup>
@@ -62,7 +62,7 @@ const { filterStatus, setFilterStatus } = useTodoStore();
 
         <Portal>
           <Select.Positioner>
-            <Select.Content>
+            <Select.Content className="light" borderColor='blue.default' borderWidth='1px'>
               {statusList.items.map((item) => (
                 <Select.Item
                   key={item.value}

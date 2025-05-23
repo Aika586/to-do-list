@@ -40,7 +40,7 @@ const AddEditForm = ({
       reset();
     }
   }, [selectedTodo, reset]);
- 
+
   const onSubmit = handleSubmit((data) => {
     if (selectedTodo) {
       editTodo(selectedTodo.id, data);
@@ -52,10 +52,10 @@ const AddEditForm = ({
     reset();
   });
 
-  const handelCancel=()=>{
+  const handelCancel = () => {
     setSelectedTodo(null);
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   return (
     <form onSubmit={onSubmit}>
       <Stack gap="4" padding="3">
@@ -78,12 +78,22 @@ const AddEditForm = ({
             size="md"
             resize={"none"}
             height="100px"
+            fontFamily={'heading'}
             borderColor={errors.description ? "red.500" : "border.default"}
-            _placeholder={{ color: "#C3C1E5", fontSize: "16px" }}
+            _placeholder={{ color: "#C3C1E5", fontSize: "16px",fontFamily:'heading' }}
             _focusWithin={{
               borderColor: "blue.400",
               boxShadow: "0 0 5px blue",
-              color:'fg.inputText'
+              color: "fg.inputText",
+            }}
+            _dark={{
+              _focusWithin: {
+                borderColor: "white",
+                boxShadow: "0 0 8px white",
+              },
+              _placeholder:{
+                color:"#666666"
+              }
             }}
             {...register("description", {
               required: "Description of note is required",

@@ -1,4 +1,4 @@
-import { Button} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ProgressCircle } from "./ProgressCircle";
 import { BsArrow90DegLeft } from "react-icons/bs";
 
@@ -16,16 +16,19 @@ const UndoButton = ({
   return (
     <Button
       variant={"solid"}
-      size='md'
-      bg='blue.600'
+      size="md"
+      bg="blue.600"
       _hover={{
-        bg:'blue.default'
+        bg: "blue.default",
       }}
-      w='123px'
+      borderWidth="2px"
+      borderColor="blue.default"
+      w="123px"
       onClick={onUndo}
       fontSize={"md"}
       fontWeight="normal"
-      p='1'
+      p="1"
+      animation= "fade-in 300ms ease-out"
     >
       <ProgressCircle
         value={progress}
@@ -37,4 +40,4 @@ const UndoButton = ({
     </Button>
   );
 };
- export default UndoButton
+export default UndoButton;

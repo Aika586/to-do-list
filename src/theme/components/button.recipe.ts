@@ -40,7 +40,7 @@ export const buttonRecipe = defineRecipe({
       outline: {
         borderWidth: "1px",
         borderColor: "blue.default",
-        bg: "white",
+        bg: "bg.default",
         _hover: {
           bg: "blue.default",
           color: "white",

@@ -1,10 +1,12 @@
-import { Input, InputGroup, CloseButton } from "@chakra-ui/react";
+import { Input, InputGroup, CloseButton} from "@chakra-ui/react";
 import { LuSearch } from "react-icons/lu";
 import { useRef} from "react";
 import { useTodoStore } from "../store/todoStore";
+import { useColorModeValue } from "./ui/color-mode";
 
 const SearchTodos = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const searchIconColor = useColorModeValue("blue", "white");
   const { searchQuery, setSearchQuery } = useTodoStore();
   const endElement = searchQuery ? (
     <CloseButton
@@ -21,7 +23,7 @@ const SearchTodos = () => {
     <InputGroup
       flex="1"
       startElement={
-        <LuSearch size={"21px"} color="blue" strokeWidth={"1.3px"} />
+        <LuSearch size={"21px"} color={searchIconColor} strokeWidth={"1.3px"}/>
       }
       endElement={endElement}
       maxW="595px"

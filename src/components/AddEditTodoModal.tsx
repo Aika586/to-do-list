@@ -16,7 +16,7 @@ const AddEditTodoModal = () => {
       onOpenChange={(e) => setOpen(e.open)}
     >
       <Portal>
-        <Dialog.Backdrop />
+        <Dialog.Backdrop backdropFilter="blur(2px)" />
         <Dialog.Positioner>
           <Dialog.Content
             borderRadius={"16px"}

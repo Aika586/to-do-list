@@ -8,7 +8,9 @@ const config = defineConfig({
       input:inputRecipe,
     },
     tokens: {
-
+ fonts: {
+        heading: { value: "Inter" },
+      },
       colors: {
         blue: {
           default: { value: "#6C63FF" },
@@ -34,11 +36,6 @@ const config = defineConfig({
         border: {
           default: {
             value: { _light: "{colors.blue.default}", _dark: "{colors.white}" }, 
-          },
-        },
-        focusColor: {
-          default: {
-            value: { _light: "{colors.blue.400}", _dark: "{colors.white}" }, 
           },
         },
       },
